@@ -118,6 +118,12 @@ All of the "modules" are all packaged together into one "executable" (unit).
 * **Easily Rewriteable** -- so small it's easy to rewrite
 * -ables: Scalable, Flexible, Reliable
 
+**Approach:**
+
+* **Identify a Single Focus** -- business function, business domain
+* **Be Prepared to Split into Finer Grained Services**
+* **Avoid "Is kind of the same" Mentality**
+
 #### Autonomous
 
 * **Loose Coupling** -- between clients and services and between services
@@ -147,7 +153,7 @@ All of the "modules" are all packaged together into one "executable" (unit).
 
 #### Observable
 
-* **System Health** -- status, logs, activity, errors, etc.
+* **Easy to View System Health** -- status, logs, activity, errors, etc.
 * **Centralized Monitoring**
 * **Centralized Logging**
 * **Quick Issue Identification and Resolution**
