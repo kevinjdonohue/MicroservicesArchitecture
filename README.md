@@ -120,9 +120,19 @@ All of the "modules" are all packaged together into one "executable" (unit).
 
 **Approach:**
 
-* **Identify a Single Focus** -- business function, business domain
+* **Identify a Single Focus** -- separate things by business function or business domain
+  * ex. Accounts CRUD operations and Accounts Invoice Generation -- these are related (same business domain) but should be separated because they have unique input and output data
 * **Be Prepared to Split into Finer Grained Services**
+  * ex. Accounts Invoice Generation could be split into Accounts EDI (electronic data interchange) Invoicing and Accounts Invoicing -- again because they are related but can be separated because they have unique input and output data
 * **Avoid "Is kind of the same" Mentality**
+  * This thinking is how similar functionality ends up in the same service insteasd of broken out into microservices
+* **Don't Get Lazy**
+  * This approach takes discipline and requires that we remember what the overall objective of the microservices approach are instead of just being concerned with day-to-day concerns
+* **Don't be Afraid to Create Many Services**
+  * The expectation with this approach is that over time you will create many services
+* **Question Approach During Pairing Sessions, Code/Peer Reviews**
+  * Pairing and reviews are excellent opportunities to ask the question "Can this change for more than one reason?"
+  * If the answer is "Yes", then consider the other aspects of this approach and overall objective
 
 #### Autonomous
 
@@ -133,6 +143,26 @@ All of the "modules" are all packaged together into one "executable" (unit).
 * **Independently Deployable**
 * **Backwards Compatible**
 * **Concurrent Development**
+
+**Approach:**
+
+* **Loosely Coupled** -- Microservices should only have minimal knowledge about each other (via network communication)
+  * **Communication by Network**
+    * Consider Synchronous Communication whereby services respond the each other immediately and use a callback-style mechanism to indicate when the work has actually been completed
+    * Consider Asynchronous Communication whereby a Message Broker is used; publish and subscribe to events
+  * **Technology Agnostic**
+    * Use open communication protocols like REST over HTTP and JSON (data) in order to allow any technology stack to be used
+  * **Avoid the use of Client Libraries** -- where the consumer of your microservice requires your client to talk to your service -- creates tight coupling
+* **Use Contracts between Services**
+  * Fixed, Agreed Upon Interfaces
+  * Shared Models
+    * Never expose model properties that are only used or needed by a service internally in the Shared Model -- maintain an internal model / representation that is different
+* **Avoid Chatty Exchanges between Services**
+  * Chatty exchanges are a form of coupling -- increasing the opportunity for a change in one service to drive a change in the other
+* **Avoid Sharing between Services**
+  * Don't share things like a database -- creates coupling between them and ties each to the same technology stack (db implementation)
+* **Ownership by Team**
+  * Ownership places the responsibility on a single team -- which is good because that team can ensure the service stays autonomous, has good contracts (interfaces). In addition, ownerhsip places the overall responsibility for long-term maintenance on that team -- which means they will be motivated to do the "right things"
 
 #### Business Domain Centric
 
